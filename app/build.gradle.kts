@@ -1,39 +1,79 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
+    id(Ktlint.Plugin) version Ktlint.Version
+    id(Detekt.Plugin) version Detekt.Version
+    id(Jetbrains.Dokka.Plugin) version KotlinVersion
 }
 
 android {
     namespace = "com.spaceapps.template"
-    compileSdk = 32
+    compileSdk = CompileSdk
 
     defaultConfig {
         applicationId = "com.spaceapps.template"
-        minSdk = 24
-        targetSdk = 32
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = MinSdk
+        targetSdk = CompileSdk
+        versionCode = VersionCode
+        versionName = VersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
+    packagingOptions {
+        resources {
+            excludes += listOf("/META-INF/{AL2.0,LGPL2.1}")
+        }
+    }
+    hilt {
+        enableAggregatingTask = true
     }
 }
 
-dependencies {
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    verbose.set(true)
+    android.set(true)
+    outputToConsole.set(true)
+    outputColorName.set("RED")
+    ignoreFailures.set(false)
+    enableExperimentalRules.set(false)
+    disabledRules.set(setOf("no-wildcard-imports", "max-line-length", "import-ordering"))
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
+    }
+}
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("com.google.android.material:material:1.7.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+detekt {
+    config = files("$rootDir/.detekt/config.yml")
+}
+
+dependencies {
+    implementation(AndroidX.Core.Ktx)
+    implementation(AndroidX.AppCompat.AppCompat)
+    coreLibraryDesugaring(Android.Tools.Desugar)
+    //    Dagger-Hilt
+    implementation(Google.Dagger.HiltAndroid)
+    kapt(Google.Dagger.HiltAndroidCompiler)
 }
