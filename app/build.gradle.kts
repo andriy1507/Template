@@ -85,6 +85,7 @@ dependencies {
     implementation(AndroidX.AppCompat.AppCompat)
     implementation(AndroidX.Activity.Ktx)
     implementation(AndroidX.Activity.Compose)
+    implementation(AndroidX.Core.SplashScreen)
     //    Kotlin
     implementation(platform(Jetbrains.Kotlin.Bom))
     implementation(Jetbrains.Kotlin.StdLib)
@@ -99,4 +100,10 @@ dependencies {
     implementation(AndroidX.Compose.Foundation)
     implementation(AndroidX.Compose.UiToolingPreview)
     debugImplementation(AndroidX.Compose.UiTooling)
+    //    Coroutines
+    implementation(platform(Jetbrains.KotlinX.Coroutines.Bom))
+    implementation(Jetbrains.KotlinX.Coroutines.Core)
+    implementation(Jetbrains.KotlinX.Coroutines.Android)
+    //    Accompanist
+    implementation(Google.Accompanist.SystemUiController)
 }

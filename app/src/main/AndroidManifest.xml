@@ -11,10 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".app.TemplateApplication"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-        tools:targetApi="32">
+        android:theme="@style/Theme.App.Starting"
+        tools:targetApi="33">
         <activity
             android:name=".app.MainActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
