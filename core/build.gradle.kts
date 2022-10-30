@@ -1,25 +1,21 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
     id(Ktlint.Plugin) version Ktlint.Version
     id(Detekt.Plugin) version Detekt.Version
     id(Jetbrains.Dokka.Plugin) version KotlinVersion
 }
 
 android {
-    namespace = "com.spaceapps.template"
+    namespace = "com.spaceapps.template.core"
     compileSdk = CompileSdk
 
     defaultConfig {
-        applicationId = "com.spaceapps.template"
         minSdk = MinSdk
         targetSdk = CompileSdk
-        versionCode = VersionCode
-        versionName = VersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -41,14 +37,6 @@ android {
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }
-    packagingOptions {
-        resources {
-            excludes += listOf("/META-INF/{AL2.0,LGPL2.1}")
-        }
-    }
-    hilt {
-        enableAggregatingTask = true
-    }
 }
 
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
@@ -64,21 +52,10 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         include("**/kotlin/**")
     }
 }
-
 detekt {
     config = files("$rootDir/.detekt/config.yml")
 }
 
 dependencies {
-    //    Project dependencies
-    implementation(project(":core"))
-    implementation(project(":core-ui"))
-    implementation(project(":core-utils"))
-
-    implementation(AndroidX.Core.Ktx)
-    implementation(AndroidX.AppCompat.AppCompat)
     coreLibraryDesugaring(Android.Tools.Desugar)
-    //    Dagger-Hilt
-    implementation(Google.Dagger.HiltAndroid)
-    kapt(Google.Dagger.HiltAndroidCompiler)
 }
