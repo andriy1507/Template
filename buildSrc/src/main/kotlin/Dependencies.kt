@@ -1,5 +1,5 @@
-const val KotlinVersion = "1.7.0"
-const val ComposeVersion = "1.1.1"
+const val KotlinVersion = "1.7.20"
+const val ComposeVersion = "1.3.2"
 
 object AndroidX {
     object Wear {
@@ -20,22 +20,24 @@ object AndroidX {
     }
 
     object Compose {
-        const val UiTooling = "androidx.compose.ui:ui-tooling:$ComposeVersion"
-        const val UiUtil = "androidx.compose.ui:ui-util:$ComposeVersion"
-        const val Ui = "androidx.compose.ui:ui:$ComposeVersion"
-        const val Compiler = "androidx.compose.compiler:compiler:$ComposeVersion"
-        const val LiveData = "androidx.compose.runtime:runtime-livedata:$ComposeVersion"
-        const val Runtime = "androidx.compose.runtime:runtime:$ComposeVersion"
-        const val Material = "androidx.compose.material:material:$ComposeVersion"
-        const val Material3 = "androidx.compose.material3:material3:1.0.0-alpha04"
-        const val Icons = "androidx.compose.material:material-icons-extended:$ComposeVersion"
-        const val Foundation = "androidx.compose.foundation:foundation:$ComposeVersion"
-        const val Animation = "androidx.compose.animation:animation:$ComposeVersion"
+        const val Bom = "androidx.compose:compose-bom:2022.10.00"
+        const val UiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
+        const val UiTooling = "androidx.compose.ui:ui-tooling"
+        const val UiUtil = "androidx.compose.ui:ui-util"
+        const val Ui = "androidx.compose.ui:ui:"
+        const val Compiler = "androidx.compose.compiler:compiler"
+        const val LiveData = "androidx.compose.runtime:runtime-livedata"
+        const val Runtime = "androidx.compose.runtime:runtime"
+        const val Material = "androidx.compose.material:material"
+        const val Material3 = "androidx.compose.material3:material3"
+        const val Icons = "androidx.compose.material:material-icons-extended"
+        const val Foundation = "androidx.compose.foundation:foundation"
+        const val Animation = "androidx.compose.animation:animation"
 
         object Test {
-            const val Test = "androidx.compose.ui:ui-test:$ComposeVersion"
-            const val JUnit4 = "androidx.compose.ui:ui-test-junit4:$ComposeVersion"
-            const val Manifest = "androidx.compose.ui:ui-test-manifest:$ComposeVersion"
+            const val Test = "androidx.compose.ui:ui-test"
+            const val JUnit4 = "androidx.compose.ui:ui-test-junit4"
+            const val Manifest = "androidx.compose.ui:ui-test-manifest"
         }
     }
 

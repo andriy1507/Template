@@ -49,6 +49,12 @@ android {
     hilt {
         enableAggregatingTask = true
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = ComposeVersion
+    }
 }
 
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
@@ -77,8 +83,20 @@ dependencies {
 
     implementation(AndroidX.Core.Ktx)
     implementation(AndroidX.AppCompat.AppCompat)
+    implementation(AndroidX.Activity.Ktx)
+    implementation(AndroidX.Activity.Compose)
+    //    Kotlin
+    implementation(platform(Jetbrains.Kotlin.Bom))
+    implementation(Jetbrains.Kotlin.StdLib)
     coreLibraryDesugaring(Android.Tools.Desugar)
     //    Dagger-Hilt
     implementation(Google.Dagger.HiltAndroid)
     kapt(Google.Dagger.HiltAndroidCompiler)
+    //    Compose
+    implementation(platform(AndroidX.Compose.Bom))
+    implementation(AndroidX.Compose.Material3)
+    implementation(AndroidX.Compose.Ui)
+    implementation(AndroidX.Compose.Foundation)
+    implementation(AndroidX.Compose.UiToolingPreview)
+    debugImplementation(AndroidX.Compose.UiTooling)
 }
