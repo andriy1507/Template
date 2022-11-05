@@ -7,7 +7,8 @@ plugins {
 }
 
 android {
-    namespace = "com.spaceapps.template.core_ui"
+    namespace = "com.spaceapps.template.core.domain"
+
     compileSdk = CompileSdk
 
     defaultConfig {
@@ -37,17 +38,6 @@ android {
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }
-    packagingOptions {
-        resources {
-            excludes += listOf("/META-INF/{AL2.0,LGPL2.1}")
-        }
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = ComposeVersion
-    }
 }
 
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
@@ -63,6 +53,7 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         include("**/kotlin/**")
     }
 }
+
 detekt {
     config = files("$rootDir/.detekt/config.yml")
 }
@@ -72,11 +63,4 @@ dependencies {
     implementation(platform(Jetbrains.Kotlin.Bom))
     implementation(Jetbrains.Kotlin.StdLib)
     coreLibraryDesugaring(Android.Tools.Desugar)
-    //    Compose
-    implementation(platform(AndroidX.Compose.Bom))
-    implementation(AndroidX.Compose.Material3)
-    implementation(AndroidX.Compose.Ui)
-    implementation(AndroidX.Compose.Foundation)
-    implementation(AndroidX.Compose.UiToolingPreview)
-    debugImplementation(AndroidX.Compose.UiTooling)
 }

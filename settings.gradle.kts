@@ -8,6 +8,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Template"
 include(":app")
-include(":core")
-include(":core-ui")
-include(":core-utils")
+include(":core:domain")
+include(":core:ui")
+include(":core:navigation")
+include(":ui:hello")
+include(":core:data")

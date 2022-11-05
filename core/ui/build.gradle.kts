@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.spaceapps.template.core_utils"
+    namespace = "com.spaceapps.template.core.ui"
     compileSdk = CompileSdk
 
     defaultConfig {
@@ -37,10 +37,11 @@ android {
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }
-    packagingOptions {
-        resources {
-            excludes += listOf("/META-INF/{AL2.0,LGPL2.1}")
-        }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = ComposeVersion
     }
 }
 
@@ -63,11 +64,15 @@ detekt {
 }
 
 dependencies {
-    //    Project dependencies
-    implementation(project(":core"))
-
     //    Kotlin
     implementation(platform(Jetbrains.Kotlin.Bom))
     implementation(Jetbrains.Kotlin.StdLib)
     coreLibraryDesugaring(Android.Tools.Desugar)
+    //    Compose
+    implementation(platform(AndroidX.Compose.Bom))
+    implementation(AndroidX.Compose.Material3)
+    implementation(AndroidX.Compose.Ui)
+    implementation(AndroidX.Compose.Foundation)
+    implementation(AndroidX.Compose.UiToolingPreview)
+    debugImplementation(AndroidX.Compose.UiTooling)
 }

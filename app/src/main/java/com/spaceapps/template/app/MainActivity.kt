@@ -11,16 +11,16 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.spaceapps.template.core_ui.TemplateTheme
+import com.spaceapps.template.core.ui.TemplateTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.spaceapps.template.ui.hello.HelloScreen
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -36,9 +36,7 @@ class MainActivity : AppCompatActivity() {
                 val systemUiController = rememberSystemUiController()
                 systemUiController.setSystemBarsColor(Color.Transparent)
                 TemplateTheme {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(text = "Hello world")
-                    }
+                    HelloScreen()
                 }
             }
         }

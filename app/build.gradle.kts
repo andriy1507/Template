@@ -77,9 +77,10 @@ detekt {
 
 dependencies {
     //    Project dependencies
-    implementation(project(":core"))
-    implementation(project(":core-ui"))
-    implementation(project(":core-utils"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:navigation"))
+    implementation(project(":ui:hello"))
 
     implementation(AndroidX.Core.Ktx)
     implementation(AndroidX.AppCompat.AppCompat)
