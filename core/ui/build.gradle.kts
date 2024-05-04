@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.spaceapps.template.core.ui"
+    namespace = "com.spaceapps.loveyou.core.ui"
     compileSdk = CompileSdk
 
     defaultConfig {

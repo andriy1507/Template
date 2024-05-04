@@ -1,4 +1,4 @@
-package com.spaceapps.template.app
+package com.spaceapps.loveyou.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

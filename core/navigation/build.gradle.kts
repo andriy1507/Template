@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.spaceapps.template.core.navigation"
+    namespace = "com.spaceapps.loveyou.core.navigation"
 
     compileSdk = CompileSdk
 

@@ -1,4 +1,4 @@
-package com.spaceapps.template.ui.hello
+package com.spaceapps.loveyou.ui.hello
 
 import androidx.annotation.StringRes
 

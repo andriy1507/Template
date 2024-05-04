@@ -1,4 +1,4 @@
-package com.spaceapps.template.app
+package com.spaceapps.loveyou.app
 
 import android.os.Bundle
 import android.view.View
@@ -12,9 +12,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import com.spaceapps.template.core.ui.TemplateTheme
-import com.spaceapps.template.ui.hello.HelloScreen
-import com.spaceapps.template.ui.hello.HelloViewModel
+import com.spaceapps.loveyou.core.ui.TemplateTheme
+import com.spaceapps.loveyou.ui.hello.HelloScreen
+import com.spaceapps.loveyou.ui.hello.HelloViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

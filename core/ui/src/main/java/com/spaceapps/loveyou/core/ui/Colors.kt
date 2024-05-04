@@ -1,4 +1,4 @@
-package com.spaceapps.template.core.ui
+package com.spaceapps.loveyou.core.ui
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.spaceapps.template.ui.hello
+package com.spaceapps.loveyou.ui.hello
 
 import android.net.Uri
 import android.widget.Toast
@@ -51,22 +51,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
-import com.spaceapps.template.core.ui.backgroundColor
-import com.spaceapps.template.core.ui.borderColor
-import com.spaceapps.template.core.ui.buttonColor
-import com.spaceapps.template.core.ui.buttonTextStyle
-import com.spaceapps.template.core.ui.dp16
-import com.spaceapps.template.core.ui.dp2
-import com.spaceapps.template.core.ui.dp24
-import com.spaceapps.template.core.ui.dp32
-import com.spaceapps.template.core.ui.dp4
-import com.spaceapps.template.core.ui.dp64
-import com.spaceapps.template.core.ui.dp8
-import com.spaceapps.template.core.ui.instructionTextStyle
-import com.spaceapps.template.core.ui.ratio_1
-import com.spaceapps.template.core.ui.textColor
-import com.spaceapps.template.core.ui.textFieldTextStyle
-import com.spaceapps.template.core.ui.titleTextStyle
+import com.spaceapps.loveyou.core.ui.backgroundColor
+import com.spaceapps.loveyou.core.ui.borderColor
+import com.spaceapps.loveyou.core.ui.buttonColor
+import com.spaceapps.loveyou.core.ui.buttonTextStyle
+import com.spaceapps.loveyou.core.ui.dp16
+import com.spaceapps.loveyou.core.ui.dp2
+import com.spaceapps.loveyou.core.ui.dp24
+import com.spaceapps.loveyou.core.ui.dp32
+import com.spaceapps.loveyou.core.ui.dp4
+import com.spaceapps.loveyou.core.ui.dp64
+import com.spaceapps.loveyou.core.ui.dp8
+import com.spaceapps.loveyou.core.ui.instructionTextStyle
+import com.spaceapps.loveyou.core.ui.ratio_1
+import com.spaceapps.loveyou.core.ui.textColor
+import com.spaceapps.loveyou.core.ui.textFieldTextStyle
+import com.spaceapps.loveyou.core.ui.titleTextStyle
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

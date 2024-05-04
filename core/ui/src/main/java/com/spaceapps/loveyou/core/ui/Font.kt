@@ -1,17 +1,18 @@
-package com.spaceapps.template.core.ui
+package com.spaceapps.loveyou.core.ui
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import com.spaceapps.loveyou.core.ui.R
 
 val DancingScript =
     FontFamily(
         Font(R.font.dancingscript_regular),
         Font(R.font.dancingscript_medium),
         Font(R.font.dancingscript_semibold),
-        Font(R.font.dancingscript_bold),
+        Font(R.font.dancingscript_bold)
     )
 
 val titleTextStyle =
@@ -21,7 +22,7 @@ val titleTextStyle =
         color = textColor,
         fontSize = sp48,
         textAlign = TextAlign.Center,
-        lineHeight = sp64,
+        lineHeight = sp64
     )
 val instructionTextStyle =
     TextStyle(
@@ -30,7 +31,7 @@ val instructionTextStyle =
         color = textColor,
         fontSize = sp36,
         textAlign = TextAlign.Center,
-        lineHeight = sp48,
+        lineHeight = sp48
     )
 val textFieldTextStyle =
     TextStyle(
@@ -39,7 +40,7 @@ val textFieldTextStyle =
         color = textFieldColor,
         fontSize = sp24,
         textAlign = TextAlign.Center,
-        lineHeight = sp36,
+        lineHeight = sp36
     )
 val buttonTextStyle =
     TextStyle(
@@ -48,5 +49,5 @@ val buttonTextStyle =
         color = textColor,
         fontSize = sp24,
         textAlign = TextAlign.Center,
-        lineHeight = sp36,
+        lineHeight = sp36
     )

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.spaceapps.template.core.remote"
+    namespace = "com.spaceapps.loveyou.core.remote"
 
     compileSdk = CompileSdk
 

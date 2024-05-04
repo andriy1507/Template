@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.spaceapps.template.core.local"
+    namespace = "com.spaceapps.loveyou.core.local"
 
     compileSdk = CompileSdk
 

@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.spaceapps.template"
+    namespace = "com.spaceapps.loveyou"
     compileSdk = CompileSdk
 
     defaultConfig {
-        applicationId = "com.spaceapps.template"
+        applicationId = "com.spaceapps.loveyou"
         minSdk = MinSdk
         targetSdk = CompileSdk
         versionCode = VersionCode
