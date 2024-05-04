@@ -6,17 +6,12 @@ import android.view.ViewTreeObserver
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.spaceapps.template.core.ui.TemplateTheme
-import com.spaceapps.template.ui.hello.HelloScreen
-import com.spaceapps.template.ui.hello.HelloViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,7 +20,6 @@ import kotlinx.coroutines.withContext
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var startDestination: String? = null
-    private val helloViewModel: HelloViewModel by viewModels<HelloViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +32,7 @@ class MainActivity : AppCompatActivity() {
         observeSplashScreenVisibility {
             setContent {
                 TemplateTheme {
-                    val state by helloViewModel.uiState.collectAsState()
-                    HelloScreen(
-                        state = state,
-                        onActionSubmit = helloViewModel::onActionSubmit,
-                        events = helloViewModel.uiEvents
-                    )
+
                 }
             }
         }
