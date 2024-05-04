@@ -3,7 +3,7 @@ plugins {
     kotlin("android")
     id(Ktlint.Plugin) version Ktlint.Version
     id(Detekt.Plugin) version Detekt.Version
-    id(Jetbrains.Dokka.Plugin) version KotlinVersion
+    id(Jetbrains.Dokka.Plugin) version Jetbrains.Dokka.Version
 }
 
 android {
@@ -12,8 +12,6 @@ android {
 
     defaultConfig {
         minSdk = MinSdk
-        targetSdk = CompileSdk
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -23,19 +21,24 @@ android {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
         debug {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     buildFeatures {
         compose = true
@@ -64,9 +67,11 @@ detekt {
 }
 
 dependencies {
+    implementation(project(Project.Core.Ui))
     //    Kotlin
     implementation(platform(Jetbrains.Kotlin.Bom))
     implementation(Jetbrains.Kotlin.StdLib)
+    implementation(AndroidX.Lifecycle.Runtime)
     coreLibraryDesugaring(Android.Tools.Desugar)
     //    Compose
     implementation(platform(AndroidX.Compose.Bom))
@@ -74,5 +79,8 @@ dependencies {
     implementation(AndroidX.Compose.Ui)
     implementation(AndroidX.Compose.Foundation)
     implementation(AndroidX.Compose.UiToolingPreview)
+    implementation(AndroidX.Lifecycle.ViewModelCompose)
+
+    implementation(AndroidX.Browser.Browser)
     debugImplementation(AndroidX.Compose.UiTooling)
 }

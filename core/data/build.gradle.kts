@@ -1,16 +1,17 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id(Ktlint.Plugin) version Ktlint.Version
+    id(Detekt.Plugin) version Detekt.Version
+    id(Jetbrains.Dokka.Plugin) version Jetbrains.Dokka.Version
 }
 
 android {
     namespace = "com.spaceapps.template.core.data"
-    compileSdk = 32
+    compileSdk = CompileSdk
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 32
-
+        minSdk = MinSdk
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -20,25 +21,40 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    verbose.set(true)
+    android.set(true)
+    outputToConsole.set(true)
+    outputColorName.set("RED")
+    ignoreFailures.set(false)
+    enableExperimentalRules.set(false)
+    disabledRules.set(setOf("no-wildcard-imports", "max-line-length", "import-ordering"))
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
+    }
+}
+
+detekt {
+    config = files("$rootDir/.detekt/config.yml")
 }
 
 dependencies {
-
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("com.google.android.material:material:1.7.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    implementation(AndroidX.Core.Ktx)
+    implementation(AndroidX.AppCompat.AppCompat)
+    coreLibraryDesugaring(Android.Tools.Desugar)
 }

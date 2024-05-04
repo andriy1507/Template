@@ -5,7 +5,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     id(Ktlint.Plugin) version Ktlint.Version
     id(Detekt.Plugin) version Detekt.Version
-    id(Jetbrains.Dokka.Plugin) version KotlinVersion
+    id(Jetbrains.Dokka.Plugin) version Jetbrains.Dokka.Version
 }
 
 android {
@@ -27,21 +27,26 @@ android {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
         debug {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes += listOf("/META-INF/{AL2.0,LGPL2.1}")
         }
@@ -87,6 +92,7 @@ dependencies {
     implementation(AndroidX.Activity.Ktx)
     implementation(AndroidX.Activity.Compose)
     implementation(AndroidX.Core.SplashScreen)
+    implementation(AndroidX.Browser.Browser)
     //    Kotlin
     implementation(platform(Jetbrains.Kotlin.Bom))
     implementation(Jetbrains.Kotlin.StdLib)
@@ -105,6 +111,4 @@ dependencies {
     implementation(platform(Jetbrains.KotlinX.Coroutines.Bom))
     implementation(Jetbrains.KotlinX.Coroutines.Core)
     implementation(Jetbrains.KotlinX.Coroutines.Android)
-    //    Accompanist
-    implementation(Google.Accompanist.SystemUiController)
 }
