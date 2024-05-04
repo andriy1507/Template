@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    id(Ksp.Plugin) version Ksp.Version
     id(Ktlint.Plugin) version Ktlint.Version
     id(Detekt.Plugin) version Detekt.Version
     id(Jetbrains.Dokka.Plugin) version Jetbrains.Dokka.Version
@@ -80,7 +81,9 @@ dependencies {
     implementation(AndroidX.Compose.Foundation)
     implementation(AndroidX.Compose.UiToolingPreview)
     implementation(AndroidX.Lifecycle.ViewModelCompose)
-
+    //    Dagger-Hilt
+    implementation(Google.Dagger.HiltAndroid)
+    ksp(Google.Dagger.HiltAndroidCompiler)
     implementation(AndroidX.Browser.Browser)
     debugImplementation(AndroidX.Compose.UiTooling)
 }

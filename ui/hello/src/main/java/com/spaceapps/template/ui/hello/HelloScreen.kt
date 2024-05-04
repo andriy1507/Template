@@ -67,17 +67,21 @@ import com.spaceapps.template.core.ui.ratio_1
 import com.spaceapps.template.core.ui.textColor
 import com.spaceapps.template.core.ui.textFieldTextStyle
 import com.spaceapps.template.core.ui.titleTextStyle
+import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HelloScreen(viewModel: HelloViewModel) {
-    val state by viewModel.uiState.collectAsState()
+fun HelloScreen(
+    state: HelloUiState,
+    onActionSubmit: (HelloAction) -> Unit,
+    events: Flow<HelloUiEvent>
+) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
-
-    LaunchedEffect(viewModel.uiEvents) {
+    val pagerState = rememberPagerState(pageCount = state::pagesCount)
+    LaunchedEffect(events) {
         lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            viewModel.uiEvents.collect { sideEffect ->
+            events.collect { sideEffect ->
                 when (sideEffect) {
                     is HelloUiEvent.OnButtonClick -> {
                         val customTabIntent =
@@ -90,25 +94,26 @@ fun HelloScreen(viewModel: HelloViewModel) {
                                 .build()
                         customTabIntent.launchUrl(context, Uri.parse(sideEffect.url))
                     }
+
                     is HelloUiEvent.ShowToast ->
                         Toast.makeText(context, sideEffect.id, Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
-    val pagerState = rememberPagerState(pageCount = viewModel::pagesCount)
     Box(
         modifier =
-            Modifier
-                .fillMaxSize()
-                .background(backgroundColor),
+        Modifier
+            .fillMaxSize()
+            .background(backgroundColor),
     ) {
+//        Horizontal pager
         HorizontalPager(
             modifier = Modifier.fillMaxSize(),
             state = pagerState,
-        ) {
-            if (!viewModel.isLastPage(it)) {
-                val data = viewModel.getPageData(it)
+        ) { page ->
+            if (page < (state.pagesCount - 1)) {
+                val data = state.pagesData[page]
                 PagerItem(
                     modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars),
                     imageRes = data.imageId,
@@ -117,12 +122,13 @@ fun HelloScreen(viewModel: HelloViewModel) {
             } else {
                 GoToDateItem(
                     modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars),
-                    onValueChange = viewModel::onCodeEntered,
+                    onValueChange = { onActionSubmit(HelloAction.CodeEntered(it)) },
                     secretCode = state.secretCode,
-                    onClick = viewModel::onButtonClick,
+                    onClick = { onActionSubmit(HelloAction.ButtonClicked) },
                 )
             }
         }
+//        Pager indicator
         Row(
             Modifier
                 .padding(bottom = dp64)
@@ -135,11 +141,11 @@ fun HelloScreen(viewModel: HelloViewModel) {
             repeat(pagerState.pageCount) { i ->
                 val color by animateColorAsState(
                     targetValue =
-                        if (pagerState.currentPage == i) {
-                            textColor
-                        } else {
-                            textColor.copy(alpha = .5f)
-                        },
+                    if (pagerState.currentPage == i) {
+                        textColor
+                    } else {
+                        textColor.copy(alpha = .5f)
+                    },
                     label = "",
                 )
                 val size by animateDpAsState(
@@ -148,11 +154,11 @@ fun HelloScreen(viewModel: HelloViewModel) {
                 )
                 Box(
                     modifier =
-                        Modifier
-                            .padding(dp4)
-                            .clip(CircleShape)
-                            .background(color)
-                            .size(size),
+                    Modifier
+                        .padding(dp4)
+                        .clip(CircleShape)
+                        .background(color)
+                        .size(size),
                 )
             }
         }
@@ -166,18 +172,18 @@ fun PagerItem(
     @StringRes textRes: Int,
 ) = Column(
     modifier =
-        modifier
-            .fillMaxSize()
-            .padding(dp24),
+    modifier
+        .fillMaxSize()
+        .padding(dp24),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center,
 ) {
     Image(
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .aspectRatio(ratio = ratio_1)
-                .clip(CircleShape),
+        Modifier
+            .fillMaxWidth()
+            .aspectRatio(ratio = ratio_1)
+            .clip(CircleShape),
         painter = painterResource(id = imageRes),
         contentDescription = "Image",
         contentScale = ContentScale.Crop,
@@ -196,10 +202,10 @@ fun GoToDateItem(
     onClick: () -> Unit,
 ) = Column(
     modifier =
-        modifier
-            .windowInsetsPadding(WindowInsets.ime)
-            .fillMaxSize()
-            .padding(horizontal = dp24),
+    modifier
+        .windowInsetsPadding(WindowInsets.ime)
+        .fillMaxSize()
+        .padding(horizontal = dp24),
     verticalArrangement = Arrangement.Center,
 ) {
     Text(
@@ -213,19 +219,19 @@ fun GoToDateItem(
     )
     Button(
         modifier =
-            Modifier
-                .fillMaxWidth(),
+        Modifier
+            .fillMaxWidth(),
         onClick = onClick,
         colors =
-            ButtonDefaults.buttonColors(
-                containerColor = buttonColor,
-                contentColor = textColor,
-            ),
+        ButtonDefaults.buttonColors(
+            containerColor = buttonColor,
+            contentColor = textColor,
+        ),
         elevation =
-            ButtonDefaults.buttonElevation(
-                defaultElevation = dp2,
-                pressedElevation = dp8,
-            ),
+        ButtonDefaults.buttonElevation(
+            defaultElevation = dp2,
+            pressedElevation = dp8,
+        ),
         contentPadding = PaddingValues(dp16),
     ) {
         Text(
@@ -243,18 +249,18 @@ private fun CustomTextField(
 ) {
     Box(
         modifier =
-            modifier
-                .height(dp64)
-                .background(
-                    color = textColor,
-                    shape = RoundedCornerShape(dp32),
-                )
-                .border(
-                    width = dp2,
-                    color = borderColor,
-                    shape = RoundedCornerShape(dp32),
-                )
-                .padding(horizontal = dp24),
+        modifier
+            .height(dp64)
+            .background(
+                color = textColor,
+                shape = RoundedCornerShape(dp32),
+            )
+            .border(
+                width = dp2,
+                color = borderColor,
+                shape = RoundedCornerShape(dp32),
+            )
+            .padding(horizontal = dp24),
         contentAlignment = Alignment.Center,
     ) {
         BasicTextField(

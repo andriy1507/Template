@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("kapt")
+    id(Ksp.Plugin)
     id("dagger.hilt.android.plugin")
     id(Ktlint.Plugin) version Ktlint.Version
     id(Detekt.Plugin) version Detekt.Version
@@ -99,7 +99,7 @@ dependencies {
     coreLibraryDesugaring(Android.Tools.Desugar)
     //    Dagger-Hilt
     implementation(Google.Dagger.HiltAndroid)
-    kapt(Google.Dagger.HiltAndroidCompiler)
+    ksp(Google.Dagger.HiltAndroidCompiler)
     //    Compose
     implementation(platform(AndroidX.Compose.Bom))
     implementation(AndroidX.Compose.Material3)

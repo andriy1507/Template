@@ -14,7 +14,8 @@ private const val URL_PREFIX =
     "https://www.host.playersgetready.com/games/%d0%b3%d1%80%d0%b0-%d0%b4%d0%bb%d1%8f-%d1%89%d0%b8%d1%80%d0%b8%d1%85-%d0%bf%d0%be%d0%b1%d0%b0%d1%87%d0%b5%d0%bd%d1%8c/?id=69181&code="
 private const val URL_SUFFIX = "&connect=89011"
 
-class HelloViewModel : ViewModel() {
+class HelloViewModel() : ViewModel() {
+
     private val pagesData: List<PageData> =
         listOf(
             PageData(R.drawable.making_presents, R.string.making_presents),
@@ -37,30 +38,44 @@ class HelloViewModel : ViewModel() {
             PageData(R.drawable.celebrating_another_year, R.string.celebrating_another_year),
             PageData(R.drawable.want_to_marry, R.string.want_to_marry),
         )
-    val pagesCount = pagesData.size + 1
 
-    private val _uiState = MutableStateFlow(HelloUiState())
-    val uiState =
-        _uiState.asStateFlow()
-            .stateIn(
-                started = SharingStarted.WhileSubscribed(5),
-                initialValue = HelloUiState(),
-                scope = viewModelScope,
-            )
+    private val pendingActions = MutableSharedFlow<HelloAction>()
+
+    private val _uiState = MutableStateFlow(
+        value = HelloUiState(
+            pagesData = pagesData,
+            pagesCount = pagesData.size + 1,
+            secretCode = ""
+        )
+    )
+    val uiState = _uiState.asStateFlow().stateIn(
+        started = SharingStarted.WhileSubscribed(5),
+        initialValue = HelloUiState(),
+        scope = viewModelScope,
+    )
 
     private val _uiEvents = MutableSharedFlow<HelloUiEvent>()
     val uiEvents = _uiEvents.asSharedFlow()
 
-    fun onCodeEntered(code: String) =
+    init {
+        collectActions()
+    }
+
+    private fun collectActions() = viewModelScope.launch {
+        pendingActions.collect { action ->
+            when (action) {
+                HelloAction.ButtonClicked -> onButtonClick()
+                is HelloAction.CodeEntered -> onCodeEntered(action.code)
+            }
+        }
+    }
+
+    private fun onCodeEntered(code: String) =
         viewModelScope.launch {
             _uiState.emit(_uiState.value.copy(secretCode = code))
         }
 
-    fun isLastPage(pageNum: Int) = pageNum >= pagesData.size
-
-    fun getPageData(pageNum: Int) = pagesData[pageNum]
-
-    fun onButtonClick() =
+    private fun onButtonClick() =
         viewModelScope.launch {
             val code = uiState.value.secretCode
             if (isCodeValid(code)) {
@@ -73,4 +88,7 @@ class HelloViewModel : ViewModel() {
         }
 
     private fun isCodeValid(code: String) = code.length == 15
+    fun onActionSubmit(action: HelloAction) = viewModelScope.launch {
+        pendingActions.emit(action)
+    }
 }

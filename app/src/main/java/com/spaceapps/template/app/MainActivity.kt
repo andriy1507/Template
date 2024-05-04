@@ -8,6 +8,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -36,7 +38,12 @@ class MainActivity : AppCompatActivity() {
         observeSplashScreenVisibility {
             setContent {
                 TemplateTheme {
-                    HelloScreen(helloViewModel)
+                    val state by helloViewModel.uiState.collectAsState()
+                    HelloScreen(
+                        state = state,
+                        onActionSubmit = helloViewModel::onActionSubmit,
+                        events = helloViewModel.uiEvents
+                    )
                 }
             }
         }

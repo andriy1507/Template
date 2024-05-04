@@ -2,6 +2,7 @@
 plugins {
     id(Jetbrains.Kover.Plugin) version Jetbrains.Kover.Version
     id(Jetbrains.Dokka.Plugin) version Jetbrains.Dokka.Version
+    id(Ksp.Plugin) version Ksp.Version apply false
 }
 buildscript {
     repositories {

@@ -3,13 +3,13 @@ const val ComposeVersion = "1.5.13"
 
 object Project {
     object Core {
-        private const val name = ":core"
-        const val Data = "$name:data"
-        const val Domain = "$name:domain"
-        const val Local = "$name:local"
-        const val Navigation = "$name:navigation"
-        const val Remote = "$name:remote"
-        const val Ui = "$name:ui"
+        private const val Name = ":core"
+        const val Data = "$Name:data"
+        const val Domain = "$Name:domain"
+        const val Local = "$Name:local"
+        const val Navigation = "$Name:navigation"
+        const val Remote = "$Name:remote"
+        const val Ui = "$Name:ui"
     }
 }
 
@@ -18,7 +18,7 @@ object AndroidX {
         const val Browser = "androidx.browser:browser:1.8.0"
     }
     object Hilt {
-        private const val HiltVersion = "1.0.0"
+        private const val HiltVersion = "1.2.0"
         const val ViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
         const val NavigationCompose = "androidx.hilt:hilt-navigation-compose:$HiltVersion"
         const val Compiler = "androidx.hilt:hilt-compiler:$HiltVersion"
@@ -76,7 +76,7 @@ object Android {
 
 object Google {
     object Dagger {
-        private const val DaggerVersion = "2.42"
+        private const val DaggerVersion = "2.48"
         const val HiltAndroid = "com.google.dagger:hilt-android:$DaggerVersion"
         const val HiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:$DaggerVersion"
         const val GradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$DaggerVersion"
