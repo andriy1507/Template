@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id(Ksp.Plugin)
-    id("dagger.hilt.android.plugin")
+    id(AndroidX.Hilt.Plugin)
     id(Ktlint.Plugin) version Ktlint.Version
     id(Detekt.Plugin) version Detekt.Version
     id(Jetbrains.Dokka.Plugin) version Jetbrains.Dokka.Version
@@ -39,7 +39,7 @@ android {
         }
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JvmTarget
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -82,10 +82,11 @@ detekt {
 
 dependencies {
     //    Project dependencies
-    implementation(project(":core:ui"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:navigation"))
-    implementation(project(":ui:hello"))
+    implementation(project(Project.Core.Ui))
+    implementation(project(Project.Core.Domain))
+    implementation(project(Project.Core.Navigation))
+    implementation(project(Project.Feature.Auth))
+    implementation(project(Project.Core.Remote))
 
     implementation(AndroidX.Core.Ktx)
     implementation(AndroidX.AppCompat.AppCompat)
@@ -93,6 +94,7 @@ dependencies {
     implementation(AndroidX.Activity.Compose)
     implementation(AndroidX.Core.SplashScreen)
     implementation(AndroidX.Browser.Browser)
+    implementation(AndroidX.Compose.Navigation)
     //    Kotlin
     implementation(platform(Jetbrains.Kotlin.Bom))
     implementation(Jetbrains.Kotlin.StdLib)

@@ -13,6 +13,7 @@ buildscript {
         classpath(Android.Tools.GradlePlugin)
         classpath(Jetbrains.Kotlin.GradlePlugin)
         classpath(Google.Dagger.GradlePlugin)
+        classpath(Jetbrains.KotlinX.Serialization.Plugin)
     }
 }
 

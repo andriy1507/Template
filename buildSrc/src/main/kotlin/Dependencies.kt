@@ -2,6 +2,11 @@ const val KotlinVersion = "1.9.23"
 const val ComposeVersion = "1.5.13"
 
 object Project {
+
+    object Feature {
+        private const val Name = ":feature"
+        const val Auth = "$Name:auth"
+    }
     object Core {
         private const val Name = ":core"
         const val Data = "$Name:data"
@@ -22,6 +27,7 @@ object AndroidX {
         const val ViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
         const val NavigationCompose = "androidx.hilt:hilt-navigation-compose:$HiltVersion"
         const val Compiler = "androidx.hilt:hilt-compiler:$HiltVersion"
+        const val Plugin = "dagger.hilt.android.plugin"
     }
 
     object Compose {
@@ -38,6 +44,7 @@ object AndroidX {
         const val Icons = "androidx.compose.material:material-icons-extended"
         const val Foundation = "androidx.compose.foundation:foundation"
         const val Animation = "androidx.compose.animation:animation"
+        const val Navigation = "androidx.navigation:navigation-compose:2.7.7"
     }
 
     object Navigation {
@@ -65,12 +72,23 @@ object AndroidX {
         const val LiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$LifecycleVersion"
         const val Runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$LifecycleVersion"
     }
+    object DataStore {
+        private const val Version = "1.1.1"
+        const val Preferences = "androidx.datastore:datastore-preferences:$Version"
+    }
+
+    object Room {
+        private const val Version = "2.6.1"
+        const val Runtime = "androidx.room:room-runtime:$Version"
+        const val Ktx = "androidx.room:room-ktx:$Version"
+        const val Compiler = "androidx.room:room-compiler:$Version"
+    }
 }
 
 object Android {
     object Tools {
         const val Desugar = "com.android.tools:desugar_jdk_libs:1.1.5"
-        const val GradlePlugin = "com.android.tools.build:gradle:8.4.0"
+        const val GradlePlugin = "com.android.tools.build:gradle:8.4.1"
     }
 }
 
@@ -107,6 +125,10 @@ object Jetbrains {
             const val Core = "org.jetbrains.kotlinx:kotlinx-coroutines-core"
             const val Android = "org.jetbrains.kotlinx:kotlinx-coroutines-android"
         }
+        object Serialization {
+            const val Plugin = "org.jetbrains.kotlin:kotlin-serialization:$KotlinVersion"
+            const val Json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
+        }
     }
 }
 
@@ -123,4 +145,11 @@ object Detekt {
 object Ksp {
     const val Version = "1.9.23-1.0.19"
     const val Plugin = "com.google.devtools.ksp"
+}
+
+object Ktor {
+    private const val Version = "2.3.11"
+    const val Android = "io.ktor:ktor-client-android:1.5.0"
+    const val Serialization = "io.ktor:ktor-client-serialization:1.5.0"
+    const val Logging = "io.ktor:ktor-client-logging-jvm:1.5.0"
 }

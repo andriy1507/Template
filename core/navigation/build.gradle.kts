@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    id(Ksp.Plugin)
     id(Ktlint.Plugin) version Ktlint.Version
     id(Detekt.Plugin) version Detekt.Version
     id(Jetbrains.Dokka.Plugin) version Jetbrains.Dokka.Version
@@ -34,7 +35,7 @@ android {
         }
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JvmTarget
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -65,5 +66,10 @@ dependencies {
     //    Kotlin
     implementation(platform(Jetbrains.Kotlin.Bom))
     implementation(Jetbrains.Kotlin.StdLib)
+    implementation(AndroidX.Core.Ktx)
     coreLibraryDesugaring(Android.Tools.Desugar)
+    implementation(AndroidX.Compose.Navigation)
+    //    Dagger-Hilt
+    implementation(Google.Dagger.HiltAndroid)
+    ksp(Google.Dagger.HiltAndroidCompiler)
 }

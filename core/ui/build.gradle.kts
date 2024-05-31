@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    id(Ksp.Plugin) version Ksp.Version
     id(Ktlint.Plugin) version Ktlint.Version
     id(Detekt.Plugin) version Detekt.Version
     id(Jetbrains.Dokka.Plugin) version Jetbrains.Dokka.Version
@@ -33,7 +34,7 @@ android {
         }
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JvmTarget
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -78,4 +79,7 @@ dependencies {
     implementation(AndroidX.Compose.Foundation)
     implementation(AndroidX.Compose.UiToolingPreview)
     debugImplementation(AndroidX.Compose.UiTooling)
+    //    Dagger-Hilt
+    implementation(Google.Dagger.HiltAndroid)
+    ksp(Google.Dagger.HiltAndroidCompiler)
 }

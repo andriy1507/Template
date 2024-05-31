@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("kotlin-parcelize")
     id(Ksp.Plugin) version Ksp.Version
     id(Ktlint.Plugin) version Ktlint.Version
     id(Detekt.Plugin) version Detekt.Version
@@ -8,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.spaceapps.template.ui.hello"
+    namespace = "com.spaceapps.template.feature.call"
     compileSdk = CompileSdk
 
     defaultConfig {
@@ -34,7 +35,7 @@ android {
         }
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JvmTarget
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -69,6 +70,7 @@ detekt {
 
 dependencies {
     implementation(project(Project.Core.Ui))
+    implementation(project(Project.Core.Navigation))
     //    Kotlin
     implementation(platform(Jetbrains.Kotlin.Bom))
     implementation(Jetbrains.Kotlin.StdLib)
@@ -80,6 +82,8 @@ dependencies {
     implementation(AndroidX.Compose.Ui)
     implementation(AndroidX.Compose.Foundation)
     implementation(AndroidX.Compose.UiToolingPreview)
+    implementation(AndroidX.Compose.Navigation)
+    implementation(AndroidX.Hilt.NavigationCompose)
     implementation(AndroidX.Lifecycle.ViewModelCompose)
     //    Dagger-Hilt
     implementation(Google.Dagger.HiltAndroid)
