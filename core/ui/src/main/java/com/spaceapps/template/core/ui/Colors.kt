@@ -76,7 +76,7 @@ val TemplateLightColorScheme =
         surfaceContainerLow = surfaceContainerLowLight,
         surfaceContainer = surfaceContainerLight,
         surfaceContainerHigh = surfaceContainerHighLight,
-        surfaceContainerHighest = surfaceContainerHighestLight,
+        surfaceContainerHighest = surfaceContainerHighestLight
     )
 
 val primaryDark = Color(0xFFAAC7FF)
@@ -151,5 +151,5 @@ val TemplateDarkColorScheme =
         surfaceContainerLow = surfaceContainerLowDark,
         surfaceContainer = surfaceContainerDark,
         surfaceContainerHigh = surfaceContainerHighDark,
-        surfaceContainerHighest = surfaceContainerHighestDark,
+        surfaceContainerHighest = surfaceContainerHighestDark
     )

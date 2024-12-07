@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.spaceapps.template.feature.call"
+    namespace = "com.spaceapps.template.feature.settings"
     compileSdk = CompileSdk
 
     defaultConfig {
@@ -23,14 +23,14 @@ android {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
         debug {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
     }
@@ -69,8 +69,10 @@ detekt {
 }
 
 dependencies {
+    //    Project dependencies
     implementation(project(Project.Core.Ui))
     implementation(project(Project.Core.Navigation))
+    implementation(project(Project.Core.Data))
     //    Kotlin
     implementation(platform(Jetbrains.Kotlin.Bom))
     implementation(Jetbrains.Kotlin.StdLib)

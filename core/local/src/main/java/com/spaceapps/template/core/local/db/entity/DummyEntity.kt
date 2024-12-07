@@ -5,5 +5,5 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class DummyEntity(
-    @PrimaryKey val id: Int,
+    @PrimaryKey val id: Int
 )

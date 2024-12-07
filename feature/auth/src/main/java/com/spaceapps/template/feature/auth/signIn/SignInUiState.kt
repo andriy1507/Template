@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class SignInUiState(
     val username: String,
-    val password: String,
+    val password: String
 ) : Parcelable {
     companion object {
         val Empty = SignInUiState(username = "", password = "")

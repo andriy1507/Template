@@ -6,7 +6,9 @@ object Project {
     object Feature {
         private const val Name = ":feature"
         const val Auth = "$Name:auth"
+        const val Settings = "$Name:settings"
     }
+
     object Core {
         private const val Name = ":core"
         const val Data = "$Name:data"
@@ -22,8 +24,9 @@ object AndroidX {
     object Browser {
         const val Browser = "androidx.browser:browser:1.8.0"
     }
+
     object Hilt {
-        private const val HiltVersion = "1.2.0"
+        private const val HiltVersion = "1.1.0-beta01" // Stable beta is the latest
         const val ViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
         const val NavigationCompose = "androidx.hilt:hilt-navigation-compose:$HiltVersion"
         const val Compiler = "androidx.hilt:hilt-compiler:$HiltVersion"
@@ -44,20 +47,20 @@ object AndroidX {
         const val Icons = "androidx.compose.material:material-icons-extended"
         const val Foundation = "androidx.compose.foundation:foundation"
         const val Animation = "androidx.compose.animation:animation"
-        const val Navigation = "androidx.navigation:navigation-compose:2.7.7"
+        const val Navigation = "androidx.navigation:navigation-compose:2.8.4"
     }
 
     object Navigation {
-        const val Compose = "androidx.navigation:navigation-compose:2.4.2"
+        const val Compose = "androidx.navigation:navigation-compose:2.7.0"
     }
 
     object Core {
-        const val Ktx = "androidx.core:core-ktx:1.8.0"
-        const val SplashScreen = "androidx.core:core-splashscreen:1.0.0-rc01"
+        const val Ktx = "androidx.core:core-ktx:1.12.0"
+        const val SplashScreen = "androidx.core:core-splashscreen:1.0.1"
     }
 
     object AppCompat {
-        const val AppCompat = "androidx.appcompat:appcompat:1.6.1"
+        const val AppCompat = "androidx.appcompat:appcompat:1.7.0"
     }
 
     object Activity {
@@ -65,13 +68,15 @@ object AndroidX {
         const val Ktx = "androidx.activity:activity-ktx:$ActivityVersion"
         const val Compose = "androidx.activity:activity-compose:$ActivityVersion"
     }
+
     object Lifecycle {
-        private const val LifecycleVersion = "2.4.1"
+        private const val LifecycleVersion = "2.6.2"
         const val ViewModelCompose =
             "androidx.lifecycle:lifecycle-viewmodel-compose:$LifecycleVersion"
         const val LiveData = "androidx.lifecycle:lifecycle-livedata-ktx:$LifecycleVersion"
         const val Runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$LifecycleVersion"
     }
+
     object DataStore {
         private const val Version = "1.1.1"
         const val Preferences = "androidx.datastore:datastore-preferences:$Version"
@@ -87,8 +92,8 @@ object AndroidX {
 
 object Android {
     object Tools {
-        const val Desugar = "com.android.tools:desugar_jdk_libs:1.1.5"
-        const val GradlePlugin = "com.android.tools.build:gradle:8.4.1"
+        const val Desugar = "com.android.tools:desugar_jdk_libs:2.1.3"
+        const val GradlePlugin = "com.android.tools.build:gradle:8.7.3"
     }
 }
 
@@ -120,11 +125,12 @@ object Jetbrains {
 
     object KotlinX {
         object Coroutines {
-            private const val CoroutinesVersion = "1.6.2"
+            private const val CoroutinesVersion = "1.7.3"
             const val Bom = "org.jetbrains.kotlinx:kotlinx-coroutines-bom:$CoroutinesVersion"
             const val Core = "org.jetbrains.kotlinx:kotlinx-coroutines-core"
             const val Android = "org.jetbrains.kotlinx:kotlinx-coroutines-android"
         }
+
         object Serialization {
             const val Plugin = "org.jetbrains.kotlin:kotlin-serialization:$KotlinVersion"
             const val Json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
@@ -133,7 +139,7 @@ object Jetbrains {
 }
 
 object Ktlint {
-    const val Version = "12.1.0"
+    const val Version = "11.5.1"
     const val Plugin = "org.jlleitschuh.gradle.ktlint"
 }
 
@@ -149,7 +155,9 @@ object Ksp {
 
 object Ktor {
     private const val Version = "2.3.11"
-    const val Android = "io.ktor:ktor-client-android:1.5.0"
-    const val Serialization = "io.ktor:ktor-client-serialization:1.5.0"
-    const val Logging = "io.ktor:ktor-client-logging-jvm:1.5.0"
+    const val Android = "io.ktor:ktor-client-android:$Version"
+    const val Serialization = "io.ktor:ktor-client-serialization:$Version"
+    const val Logging = "io.ktor:ktor-client-logging-jvm:$Version"
+    const val ContentNegotiation = "io.ktor:ktor-client-content-negotiation:$Version"
+    const val KotlinXSerialization = "io.ktor:ktor-serialization-kotlinx-json:$Version"
 }

@@ -24,14 +24,14 @@ android {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
         debug {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
     }
@@ -75,6 +75,8 @@ dependencies {
     implementation(Ktor.Android)
     implementation(Ktor.Serialization)
     implementation(Ktor.Logging)
+    implementation(Ktor.ContentNegotiation)
+    implementation(Ktor.KotlinXSerialization)
     //    Serialization
     implementation(Jetbrains.KotlinX.Serialization.Json)
 }

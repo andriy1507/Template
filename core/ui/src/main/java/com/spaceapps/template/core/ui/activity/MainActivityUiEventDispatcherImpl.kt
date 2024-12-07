@@ -9,13 +9,13 @@ import javax.inject.Inject
 import kotlin.coroutines.EmptyCoroutineContext
 
 class MainActivityUiEventDispatcherImpl
-    @Inject
-    constructor() : MainActivityUiEventDispatcher {
-        private val coroutineScope = CoroutineScope(EmptyCoroutineContext)
-        private val _emitter = MutableSharedFlow<MainActivityUiEvent>()
-        override val emitter: SharedFlow<MainActivityUiEvent> get() = _emitter.asSharedFlow()
+@Inject
+constructor() : MainActivityUiEventDispatcher {
+    private val coroutineScope = CoroutineScope(EmptyCoroutineContext)
+    private val _emitter = MutableSharedFlow<MainActivityUiEvent>()
+    override val emitter: SharedFlow<MainActivityUiEvent> get() = _emitter.asSharedFlow()
 
-        override fun emit(event: MainActivityUiEvent) {
-            coroutineScope.launch { _emitter.emit(event) }
-        }
+    override fun emit(event: MainActivityUiEvent) {
+        coroutineScope.launch { _emitter.emit(event) }
     }
+}

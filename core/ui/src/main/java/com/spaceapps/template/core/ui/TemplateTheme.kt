@@ -29,12 +29,12 @@ fun TemplateTheme(
     colorScheme: ColorScheme = provideColorScheme(),
     shapes: Shapes = TemplateShapes,
     typography: Typography = TemplateTypography,
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit
 ) {
     MaterialTheme(
         colorScheme = colorScheme,
         shapes = shapes,
         typography = typography,
-        content = content,
+        content = content
     )
 }

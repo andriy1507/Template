@@ -15,17 +15,19 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class DataStoreModule {
     @Provides
+    @Singleton
     fun provideDataStore(
-        @ApplicationContext context: Context,
+        @ApplicationContext context: Context
     ): DataStore<Preferences> =
         PreferenceDataStoreFactory.create(
             corruptionHandler = ReplaceFileCorruptionHandler { emptyPreferences() },
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
-            produceFile = { context.preferencesDataStoreFile("settings") },
+            produceFile = { context.preferencesDataStoreFile("settings") }
         )
 }

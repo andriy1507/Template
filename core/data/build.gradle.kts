@@ -22,7 +22,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
     }
@@ -58,6 +58,9 @@ dependencies {
     implementation(AndroidX.Core.Ktx)
     implementation(AndroidX.AppCompat.AppCompat)
     coreLibraryDesugaring(Android.Tools.Desugar)
+    //    Project dependencies
+    implementation(project(Project.Core.Local))
+    implementation(project(Project.Core.Remote))
     //    Dagger-Hilt
     implementation(Google.Dagger.HiltAndroid)
     ksp(Google.Dagger.HiltAndroidCompiler)

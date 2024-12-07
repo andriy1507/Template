@@ -27,14 +27,14 @@ android {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
         debug {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
     }
@@ -85,8 +85,9 @@ dependencies {
     implementation(project(Project.Core.Ui))
     implementation(project(Project.Core.Domain))
     implementation(project(Project.Core.Navigation))
-    implementation(project(Project.Feature.Auth))
     implementation(project(Project.Core.Remote))
+    implementation(project(Project.Feature.Auth))
+    implementation(project(Project.Feature.Settings))
 
     implementation(AndroidX.Core.Ktx)
     implementation(AndroidX.AppCompat.AppCompat)

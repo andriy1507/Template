@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         val transparent = Color.Transparent.toArgb()
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(transparent, transparent),
-            navigationBarStyle = SystemBarStyle.auto(transparent, transparent),
+            navigationBarStyle = SystemBarStyle.auto(transparent, transparent)
         )
         observeSplashScreenVisibility {
             setContent {
@@ -65,7 +65,9 @@ class MainActivity : AppCompatActivity() {
                     uiEvents.collect { event ->
                         when (event) {
                             is MainActivityUiEvent.ShowSnackBar ->
-                                snackBarHostState.showSnackbar(getString(event.message, event.args))
+                                snackBarHostState.showSnackbar(
+                                    getString(event.message, event.args)
+                                )
                         }
                     }
                 }
@@ -74,6 +76,19 @@ class MainActivity : AppCompatActivity() {
                         navController = navController,
                         startDestination = provideStartDestination(),
                         snackBarHostState = snackBarHostState,
+                        topLevelRoutes =
+                        listOf(
+                            TopLevelRoute(
+                                route = Routes.Settings.AppSettings,
+                                iconRes = android.R.drawable.star_off,
+                                labelRes = android.R.string.selectAll
+                            ),
+                            TopLevelRoute(
+                                route = Routes.Auth.SignIn,
+                                iconRes = android.R.drawable.ic_input_add,
+                                labelRes = android.R.string.selectAll
+                            )
+                        )
                     )
                 }
             }
@@ -83,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun provideStartDestination() = Routes.Auth.SignIn
+    private fun provideStartDestination() = Routes.Settings.AppSettings
 
     private fun observeSplashScreenVisibility(onReadyToDraw: () -> Unit) {
         val content: View = findViewById(android.R.id.content)
@@ -98,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                         false
                     }
                 }
-            },
+            }
         )
     }
 
@@ -107,7 +122,7 @@ class MainActivity : AppCompatActivity() {
         return remember(navigator.emitter, lifecycleOwner) {
             navigator.emitter.flowWithLifecycle(
                 lifecycleOwner.lifecycle,
-                Lifecycle.State.STARTED,
+                Lifecycle.State.STARTED
             )
         }
     }
@@ -117,7 +132,7 @@ class MainActivity : AppCompatActivity() {
         return remember {
             eventDispatcher.emitter.flowWithLifecycle(
                 lifecycleOwner.lifecycle,
-                Lifecycle.State.STARTED,
+                Lifecycle.State.STARTED
             )
         }
     }

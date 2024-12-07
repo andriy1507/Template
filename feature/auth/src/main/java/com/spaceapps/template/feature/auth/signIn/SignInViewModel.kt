@@ -19,60 +19,60 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel
-    @Inject
-    constructor(
-        private val savedStateHandle: SavedStateHandle,
-        private val navigator: Navigator,
-        private val mainActivityEventDispatcher: MainActivityUiEventDispatcher,
-    ) : ViewModel() {
-        private val username = savedStateHandle.getStateFlow("username", "")
-        private val password = savedStateHandle.getStateFlow("password", "")
-        private val pendingActions = MutableSharedFlow<SignInUiAction>()
-        private val _uiEvents = MutableSharedFlow<SignInUiEvent>()
+@Inject
+constructor(
+    private val savedStateHandle: SavedStateHandle,
+    private val navigator: Navigator,
+    private val mainActivityEventDispatcher: MainActivityUiEventDispatcher
+) : ViewModel() {
+    private val username = savedStateHandle.getStateFlow("username", "")
+    private val password = savedStateHandle.getStateFlow("password", "")
+    private val pendingActions = MutableSharedFlow<SignInUiAction>()
+    private val _uiEvents = MutableSharedFlow<SignInUiEvent>()
 
-        val uiState =
-            combine(username, password) { username, password ->
-                SignInUiState(username = username, password = password)
-            }.stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5),
-                initialValue = SignInUiState.Empty,
-            )
-        val uiEvents: SharedFlow<SignInUiEvent>
-            get() = _uiEvents.asSharedFlow()
+    val uiState =
+        combine(username, password) { username, password ->
+            SignInUiState(username = username, password = password)
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5),
+            initialValue = SignInUiState.Empty
+        )
+    val uiEvents: SharedFlow<SignInUiEvent>
+        get() = _uiEvents.asSharedFlow()
 
-        init {
-            collectActions()
-        }
+    init {
+        collectActions()
+    }
 
-        private fun collectActions() =
-            viewModelScope.launch {
-                pendingActions.collect { action ->
-                    when (action) {
-                        is SignInUiAction.UsernameEntered -> onUsernameEntered(action.username)
-                        is SignInUiAction.PasswordEntered -> onPasswordEntered(action.password)
-                        is SignInUiAction.SignInButtonClick -> onAuthButtonClick()
-                    }
+    private fun collectActions() =
+        viewModelScope.launch {
+            pendingActions.collect { action ->
+                when (action) {
+                    is SignInUiAction.UsernameEntered -> onUsernameEntered(action.username)
+                    is SignInUiAction.PasswordEntered -> onPasswordEntered(action.password)
+                    is SignInUiAction.SignInButtonClick -> onAuthButtonClick()
                 }
             }
+        }
 
-        private fun onUsernameEntered(username: String) = savedStateHandle.set("username", username)
+    private fun onUsernameEntered(username: String) = savedStateHandle.set("username", username)
 
-        private fun onPasswordEntered(password: String) = savedStateHandle.set("password", password)
+    private fun onPasswordEntered(password: String) = savedStateHandle.set("password", password)
 
-        private fun onAuthButtonClick() =
-            viewModelScope.launch {
-                mainActivityEventDispatcher.emit(
-                    MainActivityUiEvent.ShowSnackBar(
-                        R.string.test,
-                        "Uno",
-                        "Dos",
-                    ),
+    private fun onAuthButtonClick() =
+        viewModelScope.launch {
+            mainActivityEventDispatcher.emit(
+                MainActivityUiEvent.ShowSnackBar(
+                    R.string.test,
+                    "Uno",
+                    "Dos"
                 )
-            }
+            )
+        }
 
-        fun onActionSubmitted(action: SignInUiAction) =
-            viewModelScope.launch {
-                pendingActions.emit(action)
-            }
-    }
+    fun onActionSubmitted(action: SignInUiAction) =
+        viewModelScope.launch {
+            pendingActions.emit(action)
+        }
+}
